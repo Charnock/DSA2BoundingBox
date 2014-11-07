@@ -108,7 +108,8 @@ void BoundingBoxClass::SetModelMatrix(matrix4 a_mModelMatrix)
 	m_mModelToWorld = a_mModelMatrix;
 	//Sets the Model Matrix of the actual Box shape
 	//(which is translated m_v3Centrod away from the origin of our Box)
-	m_pMesh->SetModelMatrix(glm::translate(a_mModelMatrix, m_v3Centroid));
+	matrix4 modelMatrix = glm::translate(m_mModelToWorld, m_v3Centroid);
+	m_pMesh->SetModelMatrix(glm::scale(modelMatrix, m_fWidth, m_fHeight, m_fDepth));
 }
 bool BoundingBoxClass::GetVisible(void) { return m_bVisible; }
 void BoundingBoxClass::SetVisible(bool a_bVisible) { m_bVisible = a_bVisible; }
