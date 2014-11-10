@@ -146,20 +146,21 @@ void ApplicationClass::ProcessKeyboard(void)
 	}
 	else if(bWasF6Pressed == true)//if its not currently pressed but it was pressed last...
 	{
-		//m_pBBMngr->RemoveBox("ALL");//remove all spheres (if there are none currently nothing bad is going to happen)
-		//for(int nInstance = 0; nInstance < m_pModelManager->GetNumberOfInstances(); nInstance++)//for all instances...
-		//{
-		//	String sInstance = m_pModelManager->GetInstanceName(nInstance);//Create spheres
-		//	m_pBBMngr->AddBox(sInstance);
-		//}
-		//m_pBBMngr->SetVisible(true, "ALL");//Make those spheres visible
+		m_pBBMngr->RemoveBox("ALL");//remove all boxes (if there are none currently nothing bad is going to happen)
+		for(int nInstance = 0; nInstance < m_pModelManager->GetNumberOfInstances(); nInstance++)//for all instances...
+		{
+			String sInstance = m_pModelManager->GetInstanceName(nInstance);//Create spheres
+			m_pBBMngr->AddBox(sInstance);
+		}
+		m_pBBMngr->SetAAVisible(true, "ALL");//Make those boxes visible
+		m_pBBMngr->SetOVisible(true, "ALL");
 		bWasF6Pressed = false;//reset the flag
 	}
 
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::F7))
 	{
 		m_pBSMngr->RemoveSphere("ALL");
-		//m_pBBMngr->RemoveBox("ALL");
+		m_pBBMngr->RemoveBox("ALL");
 	}
 
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::F8))
@@ -215,9 +216,29 @@ void ApplicationClass::ProcessKeyboard(void)
 			String sInstance = m_pModelManager->GetInstanceName(nInstance);//Create Boxs
 			m_pBBMngr->AddBox(sInstance);
 		}
-		m_pBBMngr->SetVisible(true, "ALL");
+		m_pBBMngr->SetAAVisible(true, "ALL");
+		m_pBBMngr->SetOVisible(true, "ALL");
 		bWasNum1Pressed = false;//reset the flag
 	}
+
+	static bool bWasNum2Pressed = false;
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num2))//Check the current state to see if its pressed right now
+	{
+		bWasNum2Pressed = true;//if it is flag it
+	}
+	else if(bWasNum2Pressed == true)//if its not currently pressed but it was pressed last...
+	{
+		m_pBBMngr->RemoveBox("ALL");//remove all Boxs (if there are none currently nothing bad is going to happen)
+		for(int nInstance = 0; nInstance < m_pModelManager->GetNumberOfInstances(); nInstance++)//for all instances...
+		{
+			String sInstance = m_pModelManager->GetInstanceName(nInstance);//Create Boxs
+			m_pBBMngr->AddBox(sInstance);
+		}
+		m_pBBMngr->SetAAVisible(false, "ALL");
+		m_pBBMngr->SetOVisible(false, "ALL");
+		bWasNum2Pressed = false;//reset the flag
+	}
+
 	
 #pragma endregion
 	//Camera
