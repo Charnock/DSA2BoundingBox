@@ -34,7 +34,8 @@ void ApplicationClass::Display3X (void) //for OpenGL 3.X Applications
 	m_pModelManager->RenderInstance();
 
 	m_pBSMngr->Render();
-	m_pBBMngr->Render();
+	m_pBBMngr->RenderAA();
+	m_pBBMngr->RenderO();
 
 	m_pGLSystem->GLSwapBuffers();
 }
