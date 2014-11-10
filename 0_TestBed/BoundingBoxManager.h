@@ -15,7 +15,8 @@ class BoundingBoxManager
 	int m_nBoxes; //Number of Boxes in the List
 	std::vector<BoundingBoxClass*> m_vBoundingBox; //List of Boxes in the manager
 	ModelManagerClass* m_pModelMngr;//Model manager instance
-	std::vector<String> m_vCollidingNames;//List of Names that are currently colliding
+	std::vector<String> m_vAACollidingNames;//List of Names that are currently colliding
+	std::vector<String> m_vOCollidingNames;//List of Names that are currently colliding
 public:
 	static BoundingBoxManager* GetInstance(); // Singleton accessor
 	/*Release the Singleton */
@@ -34,12 +35,14 @@ public:
 	Arguments:
 		a_bVisible sets whether the shape will be drawn or not
 		a_sInstanceName identify the shape if ALL is provided then it applies to all shapes*/
-	void SetVisible(bool a_bVisible, String a_sInstanceName = "ALL");
+	void SetAAVisible(bool a_bVisible, String a_sInstanceName = "ALL");
+	void SetOVisible(bool a_bVisible, String a_sInstanceName = "ALL");
 	/*Sets the Color of the specified Instance
 	Arguments:
 		a_v3Color sets the color of the shape to be drawn
 		a_sInstanceName identify the shape if ALL is provided then it applies to all shapes*/
-	void SetColor(vector3 a_v3Color, String a_sInstanceName = "ALL");
+	void SetAAColor(vector3 a_v3Color, String a_sInstanceName = "ALL");
+	void SetOColor(vector3 a_v3Color, String a_sInstanceName = "ALL");
 	/*Sets the Model matrix to the object and the shape
 	Arguments:
 		a_mModelMatrix matrix4 that contains the space provided
@@ -48,7 +51,8 @@ public:
 	/*Render the specified shape
 	Arguments:
 		a_sInstanceName identify the shape if ALL is provided then it applies to all shapes*/
-	void Render(String a_sInstanceName = "ALL");
+	void RenderAA(String a_sInstanceName = "ALL");
+	void RenderO(String a_sInstanceName = "ALL");
 	/*Initializes the list of names and check collision and collision resolution*/
 	void Update(void);
 
@@ -74,7 +78,13 @@ private:
 	/*Checks whether a name is the List of collisions
 	Arguments
 		a_sName checks this specific name*/
-	bool CheckForNameInList(String a_sName);
+	bool CheckForNameInAAList(String a_sName);
+	bool CheckForNameInOList(String a_sName);
+
+	void SATCollisionCheck(void);
+
+	bool SATCalculations(int nBox1, int nBox2);
+
 };
 
 #endif //__BoundingBoxManagerClass_H__
