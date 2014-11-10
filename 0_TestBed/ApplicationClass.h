@@ -30,8 +30,6 @@ protected://General
 	
 	BoundingSphereManager* m_pBSMngr;
 	BoundingBoxManager* m_pBBMngr;
-	
-	//BoundingBoxManager* m_pBBMngr;
 
 	void Update (void);
 	void Display2X (void);
