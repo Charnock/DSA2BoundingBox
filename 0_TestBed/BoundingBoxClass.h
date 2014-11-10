@@ -127,7 +127,7 @@ private:
 	/* Calculates the Box from the instance
 	Args:
 		a_sInstance: The name of the instance for which the bounding Box is going to be calculated */
-	void CalculateAABox(String a_sInstance);
+	void CalculateAABox(void);
 	void CalculateOBox(String a_sInstance);
 
 	// SAT helper methods
